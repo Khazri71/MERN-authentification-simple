@@ -15,7 +15,7 @@ export const Inscrire = () => {
 
   const Inscrire = (e) => {
     e.preventDefault()
-    axios.post("http://localhost:3001/inscrire" , {nomutilisateur , email , motdepasse})
+    axios.post(`${import.meta.env.BASE_URL}/inscrire` , {nomutilisateur , email , motdepasse})
     .then( result => {
         console.log(result)
         setMessage(result.data)
