@@ -9,18 +9,22 @@ export const Inscrire = () => {
   const [nomutilisateur , setNomutilisateur] = useState()
   const [email , setEmail] = useState()
   const [motdepasse , setMotdepasse] = useState()
-
+  const [message , setMessage] = useState()
   const navigate = useNavigate()
 
 
   const Inscrire = (e) => {
     e.preventDefault()
     axios.post("http://localhost:3001/inscrire" , {nomutilisateur , email , motdepasse})
-    .then(result => {
+    .then( result => {
         console.log(result)
-        navigate("/connecter")
+        setMessage(result.data)
+        
+        if(result.data === "Compte est créé avec succès"){
+            navigate("/connecter")
+        }
 
-    })
+       })
     .catch(err => console.log(err))
   }
 
@@ -57,6 +61,7 @@ export const Inscrire = () => {
   </div>
 
   <button type="submit" className="btn btn-primary w-100">S'inscrire</button>
+  {message && <p className="text-danger text-center fw-bold mt-3">{message}</p>}
 
    <div className="form-text mb-1">J'ai déjà un compte</div>
    <Link to="/connecter"  className="btn btn-secondary ">Se connecter</Link>

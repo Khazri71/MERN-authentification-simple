@@ -8,6 +8,7 @@ export const Connecter = () => {
 
   const [email , setEmail] = useState()
   const [motdepasse  , setMotdepasse] = useState()
+   const [message , setMessage] = useState()
   const navigate = useNavigate()
 
 
@@ -15,8 +16,12 @@ export const Connecter = () => {
      e.preventDefault()
      axios.post("http://localhost:3001/connecter" , {email , motdepasse})
      .then( result => {
-      console.log(result)
-      navigate("/acceuil")
+        console.log(result)
+        setMessage(result.data)
+        if(result.data === "Connexion réussie"){
+            navigate("/acceuil")
+        }
+
      })
      .catch( err => console.log(err))
   }
