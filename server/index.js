@@ -2,6 +2,7 @@ const express= require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const UserModel = require('./models/User')
+require('dotenv').config();
 
 
 
@@ -10,10 +11,15 @@ app.use(cors())
 app.use(express.json())
 
 
-mongoose.connect("mongodb://localhost:27017/auth")
+// mongoose.connect("mongodb://localhost:27017/auth")
+mongoose.connect(process.env.MONGODB_URI)
 
+// Hello
+app.get('/', (req, res) => {
+  res.send('Hello');
+});
 
-// API : Authantification
+// API : Authentification
 // API : Inscrire
 app.post("/inscrire" , (req , res) => {
    UserModel.findOne({email : req.body.email})
