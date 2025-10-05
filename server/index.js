@@ -13,7 +13,6 @@ app.use(express.json())
 
 // mongoose.connect("mongodb://localhost:27017/auth")
 mongoose.connect(process.env.MONGODB_URI)
-
 // Hello
 app.get('/', (req, res) => {
   res.send('Hello');

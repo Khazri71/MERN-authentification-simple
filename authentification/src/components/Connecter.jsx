@@ -14,7 +14,7 @@ export const Connecter = () => {
 
   const Connecter = (e) => {
      e.preventDefault()
-     axios.post(`${import.meta.env.BASE_URL}/connecter` , {email , motdepasse})
+     axios.post(`${import.meta.env.VITE_BASE_URL}/connecter` , {email , motdepasse})
      .then( result => {
         console.log(result)
         setMessage(result.data)
