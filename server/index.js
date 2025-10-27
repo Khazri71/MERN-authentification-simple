@@ -1,8 +1,9 @@
 const express= require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
-const UserModel = require('./models/User')
+const cors = require('cors');
 require('dotenv').config();
+const mongoose = require('mongoose')
+const UserModel = require('./models/User');
+const DBConnect = require('./config/dbConnect');
 
 
 
@@ -11,8 +12,7 @@ app.use(cors())
 app.use(express.json())
 
 
-// mongoose.connect("mongodb://localhost:27017/auth")
-mongoose.connect(process.env.MONGODB_URI)
+
 // Hello
 app.get('/', (req, res) => {
   res.send('Hello');
@@ -53,7 +53,9 @@ app.post("/connecter" , (req , res) => {
 
 
 
-
-app.listen("3001" , () => {
-    console.log("Server is Running")
+const PORT = process.env.PORT || 5000;
+app.listen(PORT , () => {
+    // Connecter Database
+    DBConnect();
+    console.log(`server is running on port ${PORT}`)
 })
